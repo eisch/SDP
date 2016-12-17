@@ -13,9 +13,8 @@ class Student
 	double average;
 	unsigned long number;
 public:
-	
+	Student(char*, double, unsigned long);
 	Student();
-	Student(const char*, double, unsigned long );
 	const char* getName();
 	double getAverage(); 
 	unsigned long getNumber();
@@ -23,8 +22,9 @@ public:
 	void setNumber(unsigned long);
 	void setAverage(double);
 	Student& operator=(Student&);
-	//friend istream& operator>> (istream&, Student&);
+	friend istream& operator>> (istream&, Student&);
 	friend ostream& operator<<(ostream&, Student&);
+	friend bool operator==(Student&, Student&);
 };
 int compareNames(const char*, const char*);
 void errorMessage();

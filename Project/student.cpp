@@ -4,12 +4,19 @@
 
 using std::cout;
 using std::endl;
+using std::boolalpha;
 
-Student::Student() {};
-Student::Student(const char* _name = "", double _average = 0, unsigned long _number = 0): average(_average),
-number(_number)
+Student::Student(char* _name, double _average, unsigned long _number) : average(_average), number(_number)
 {
+	
 	strcpy_s(name, _name);
+	
+}
+Student::Student()
+{
+	strcpy_s(name, "");
+	average = 0;
+	number = 0;
 }
 double Student::getAverage()
 {
@@ -45,15 +52,22 @@ Student& Student::operator=(Student& other)
 	return *this;
 }
 
-/*istream & operator >> (istream &, Student &)
+bool::operator==(Student &s, Student& p)
 {
-	// TODO: insert return statement here
-}*/
+	return (strcmp(p.getName(), s.getName())==0) && (p.getAverage() == s.getAverage()) 
+		&& (p.getNumber() == s.getNumber());
+}
 
-ostream & operator<<(ostream &o, Student& s)
+istream& operator >>(istream &i, Student &s)
+{
+	return (i >> s.number >> s.average).getline(s.name, MAX_NAME_SIZE);
+}
+
+ostream& operator<<(ostream &o, Student& s)
 {
 	return o << s.name << "  " << s.number << "  " << s.average;
 }
+
 
 int compareNames(const char* first, const char* second)
 {
@@ -68,19 +82,31 @@ void errorMessage()
 
 int main()
 {
-	Student a("J", 5.5, 15554545);
-	Student b("F", 4.5, 164648548);
-	Student c("Z", 6, 5645441);
-	Student d("C", 3.5, 7454544);
+	Student a = Student("J", 5.5, 11111);
+	Student b("F", 4.5, 22222);
+	Student c("Z", 6, 33333);
+	Student d("P", 3.5, 44444);
+	Student e("D", 5, 65444);
+	Student f("Zl", 5, 65444);
+	Student g("Zf", 5, 65444);
 	//Node c(a);
-	BinaryTree first;
-	first.addStudent(a);
-	first.addStudent(b);
-	first.addStudent(c);
-	first.addStudent(d);
+BinaryTree first;
+cout << '\n' << boolalpha << first.isEmpty();
 
+	first.addS(a);
+	first.addS(b);
+	first.addS(d);
+	first.addS(c);
+	first.addS(e);
+	first.addS(f);
+	first.addS(g);
+	//first.findAverage("J");
+	//BinaryTree second;
+	//first.deleteStudent(b);
 	first.print();
+	cout << '\n' << boolalpha << first.isEmpty();
 
 	system("Pause");
 	return 0; 
+
 }

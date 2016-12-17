@@ -21,27 +21,32 @@ struct Node
 	void changeTelephoneHelper(const char*);
 	//bool deleteHelper(Node*, Node*, Student);
 	Node* deleteHelper(Student, Node*);
-	const char* minName();
+	
 	void setLeft(Node*);
 	Node* getLeft();
 	void printHelper();
+	Student minName();
 
 };
 
 class BinaryTree {
 	Node* root;
-	//bool deleteHelper(Node*, Node*, Student);
-
+	void addHelper1(Node* s, Student);
 
 
 public:
-	/*BinaryTree(Node* root) : root(nullptr) {
-
-		};*/
 	BinaryTree()
 	{
 		root = nullptr;
 	};
+	void addS(Student a)
+	{
+		
+		if (isEmpty()) root = new Node(a);
+		else addHelper1(root, a);
+		
+		
+	}
 	bool isEmpty();
 	void addStudent(Student);
 	double findAverage(const char*);
@@ -50,7 +55,6 @@ public:
 	void changeTelephoneNumber(const char*);
     bool deleteStudent(Student);
 	void print();
-	
 };
 
 #endif BINARY_TREE
