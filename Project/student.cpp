@@ -52,7 +52,7 @@ Student& Student::operator=(Student& other)
 	return *this;
 }
 
-bool::operator==(Student &s, Student& p)
+bool operator==(Student &s, Student& p)
 {
 	return (strcmp(p.getName(), s.getName())==0) && (p.getAverage() == s.getAverage()) 
 		&& (p.getNumber() == s.getNumber());
@@ -69,6 +69,8 @@ ostream& operator<<(ostream &o, Student& s)
 }
 
 
+
+
 int compareNames(const char* first, const char* second)
 {
 	return strcmp(first, second);
@@ -82,7 +84,7 @@ void errorMessage()
 
 int main()
 {
-	Student a = Student("J", 5.5, 11111);
+	Student a("J", 5.5, 11111);
 	Student b("F", 4.5, 22222);
 	Student c("Z", 6, 33333);
 	Student d("P", 3.5, 44444);
@@ -91,7 +93,6 @@ int main()
 	Student g("Zf", 5, 65444);
 	//Node c(a);
 BinaryTree first;
-cout << '\n' << boolalpha << first.isEmpty();
 
 	first.addS(a);
 	first.addS(b);
@@ -100,12 +101,14 @@ cout << '\n' << boolalpha << first.isEmpty();
 	first.addS(e);
 	first.addS(f);
 	first.addS(g);
+	first.print(); 
 	//first.findAverage("J");
-	//BinaryTree second;
+	first.changeAverage("P");
+	cout << d.getAverage();
 	//first.deleteStudent(b);
+	cout << endl;
 	first.print();
-	cout << '\n' << boolalpha << first.isEmpty();
-
+	
 	system("Pause");
 	return 0; 
 

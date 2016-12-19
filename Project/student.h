@@ -10,9 +10,10 @@ const int MAX_NAME_SIZE = 32;
 class Student
 {
 	char name[MAX_NAME_SIZE];
-	double average;
+	
 	unsigned long number;
 public:
+	double average;
 	Student(char*, double, unsigned long);
 	Student();
 	const char* getName();
