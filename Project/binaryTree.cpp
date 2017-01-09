@@ -1,5 +1,7 @@
 #include "binaryTree.h"
 #include <iostream>
+#include <fstream>
+using std::ofstream;
 using std::cout;
 using std::cin;
 
@@ -87,6 +89,7 @@ void Node::changeTelephoneHelper(const char* name)
 	}
 }
 */
+ofstream studentsFile("students.txt");
 
 Node* Node::deleteHelper(Student s, Node* parent)
 {
@@ -138,25 +141,21 @@ void Node::setLeft(Node * _left)
 {
 	this->left = _left;
 }
-
+void Node::setRight(Node* _right)
+{
+	this->right = _right;
+}
 Node * Node::getLeft()
 {
 	return left;
 }
 
-/*void Node::printHelper()
+Node * Node::getRight()
 {
-	if (left)
-	{
-		left->printHelper();
+	return right;
+}
 
-	}
-	cout << data << '\n';
-	if (right)
-	{
-		right->printHelper();
-	}
-}*/
+
 
 Student Node::minName()
 {
@@ -257,18 +256,18 @@ Student BinaryTree::find(Node *s, const char *name)
 
 void BinaryTree::avh(Node* s, const char* name, Student &st)
 {
-	if (compareNames(name, s->data.getName())==0)
+	if (compareNames(name, s->data.getName()) == 0)
 	{
-	    st = *findHelper(s, name);
+		st = *findHelper(s, name);
 		cout << "The old average - " << (*findHelper(s, name)).getAverage() << '\n';
 		cout << "Enter new average for this student:" << '\n';
 		double newAverage;
 
 		cin >> newAverage;
-st.setAverage(newAverage);
+		st.setAverage(newAverage);
 
 		cout << "The new average - " << (*findHelper(s, name)).getAverage() << '\n';
-		
+
 	}
 	else if (compareNames(name, s->data.getName()) < 0)
 	{
@@ -291,19 +290,12 @@ st.setAverage(newAverage);
 	}
 }
 
-void BinaryTree::printHelper(Node *s)
+
+
+Node * BinaryTree::minNameStudent(Node* s)
 {
-
-	if (s->left)
-	{
-		printHelper(s->left);
-
-	}
-	cout << s->data << '\n';
-	if (s->right)
-	{
-		printHelper(s->right);
-	}
+	if (s->left == nullptr) return s;
+	else return minNameStudent(s->left);
 }
 
 double BinaryTree::findAverage(const char* name)
@@ -360,11 +352,11 @@ void BinaryTree::changeAverage(const char* name)
 		cout << "Enter new average for this student:" << '\n';
 		double newAverage;
 		cin >> newAverage;
-		
-		
+
+
 		//find(root, name) = *new Student();
 		(*findHelper(root, name)).setAverage(newAverage);
-		
+
 		cout << "The new average - " << (*findHelper(root, name)).getAverage() << '\n';
 		//findH(root, name) = *findHelper(root, name);
 	}
@@ -430,7 +422,74 @@ bool BinaryTree::deleteStudent(Student s)
 void BinaryTree::print()
 {
 	if (root == nullptr) cout << "Error! Empty database!" << '\n';
-	else printHelper(root);
+	else helperPrint(root, cout);
+}
+
+/*bool BinaryTree::delSt(const char* name, Node* s)
+{
+	//if (isEmpty()) return false;
+	Node *deleter = findH(s, name);
+	cout << deleter->data << '\n';
+	if (deleter == nullptr) return false;
+
+	if (deleter->left == nullptr)
+	{
+		Node* copy = deleter;
+		cout << copy->data;
+		deleter = deleter->right;
+		delete copy;
+
+		return true;
+	}
+	if (deleter->right == nullptr)
+	{
+
+		Node* copy = deleter;
+		cout << copy->data;
+		deleter = deleter->left;
+
+		delete copy;
+
+
+		return true;
+	}
+
+	Node *saver = minNameStudent(deleter->right);
+	cout << saver->data;
+	deleter->data = saver->data;
+	//deleter = saver;
+	Node* n = saver;
+	cout << n->data;
+	/*while (saver->right != nullptr)
+	{
+	saver = saver->right;
+	//}
+	delete n;
+	return true;
+
+}
+*/
+void BinaryTree::helperPrint(Node*s, ostream &o)
+{
+
+	if (s->left != nullptr)
+	{
+		helperPrint(s->left, o);
+
+	}
+	o << s->data << '\n';
+
+	if (s->right != nullptr)
+	{
+		helperPrint(s->right, o);
+	}
+}
+
+void BinaryTree::writeStudentsInFile()
+{
+	if(root == nullptr) cout << "Error! Empty database!" << '\n';
+	else helperPrint(root, studentsFile);
+
 }
 
 

@@ -11,7 +11,15 @@ struct Node
 
 	Node(Student _data) : left(nullptr), right(nullptr)
 	{
+		left = nullptr;
+		right = nullptr;
 		data = _data;
+	}
+	Node()
+	{
+		data = Student();
+		left = nullptr;
+		right = nullptr;
 	}
 	//void addHelper(Student);
 	//bool findHelper(const char*);
@@ -23,7 +31,9 @@ struct Node
 	Node* deleteHelper(Student, Node*);
 	
 	void setLeft(Node*);
+	void setRight(Node*);
 	Node* getLeft();
+	Node *getRight();
 	//void printHelper();
 	Student minName();
 
@@ -36,7 +46,9 @@ class BinaryTree {
 	Node* findH(Node*, const char*);
 	Student find(Node*, const char*);
 	void avh(Node*, const char*, Student&);
-	void printHelper(Node*);
+    Node* minNameStudent(Node*);
+	//bool delSt(const char*, Node*);
+	void helperPrint(Node*, ostream&);
 public:
 	BinaryTree()
 	{
@@ -55,6 +67,9 @@ public:
 	void changeTelephoneNumber(const char*);
     bool deleteStudent(Student);
 	void print();
+	void printMin(const char*);
+	//bool del(const char*);
+	void writeStudentsInFile();
 };
 
 #endif BINARY_TREE
