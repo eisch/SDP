@@ -28,14 +28,14 @@ struct Node
 	//void changeAverageHelper(const char*);
 	//void changeTelephoneHelper(const char*);
 	//bool deleteHelper(Node*, Node*, Student);
-	Node* deleteHelper(Student, Node*);
-	
+	//Node* deleteHelper(Student, Node*);
+
 	void setLeft(Node*);
 	void setRight(Node*);
 	Node* getLeft();
 	Node *getRight();
 	//void printHelper();
-	Student minName();
+
 
 };
 
@@ -44,11 +44,16 @@ class BinaryTree {
 	void addHelper(Node* s, Student);
 	Student* findHelper(Node*, const char*);
 	Node* findH(Node*, const char*);
-	Student find(Node*, const char*);
+	//Student find(Node*, const char*);
 	void avh(Node*, const char*, Student&);
-    Node* minNameStudent(Node*);
+	Student minNameStudent(Node*);
 	//bool delSt(const char*, Node*);
 	void helperPrint(Node*, ostream&);
+	Node* deleteHelper(Student, Node*, Node*);
+
+
+	//Node* minNameStudent(Node*);
+
 public:
 	BinaryTree()
 	{
@@ -65,11 +70,12 @@ public:
 	unsigned long findTelephoneNumber(const char*);
 	void changeAverage(const char*);
 	void changeTelephoneNumber(const char*);
-    bool deleteStudent(Student);
+	// bool deleteStudent(Student);
 	void print();
-	void printMin(const char*);
-	//bool del(const char*);
 	void writeStudentsInFile();
+	bool deleteStudent(const char*);
+
+	//bool del(const char*);
 };
 
 #endif BINARY_TREE
