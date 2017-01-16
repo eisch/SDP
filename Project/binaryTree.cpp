@@ -43,31 +43,6 @@ void BinaryTree::addHelper(Node* s, Student p)
 		cout << "There's a student with this name!" << p.getName() << '\n';
 }
 
-Student* BinaryTree::findHelper(Node* s, const char *name)
-{
-	if (compareNames(name, s->data.getName()) == 0) return &s->data;
-	else if (compareNames(name, s->data.getName()) < 0)
-	{
-		if (s->left == nullptr) {
-			return nullptr;
-		}
-		else {
-			return findHelper(s->left, name);
-		}
-	}
-	else if (compareNames(name, s->data.getName()) > 0)
-	{
-		if (s->right == nullptr) {
-			return nullptr;
-		}
-		else {
-			return findHelper(s->right, name);
-		}
-	}
-	return nullptr;
-
-}
-
 Node* BinaryTree::findH(Node* s, const char *name)
 {
 	if (compareNames(name, s->data.getName()) == 0) return s;
@@ -105,7 +80,7 @@ double BinaryTree::findAverage(const char* name)
 {
 
 	if (isEmpty()) return 0;
-	if (findHelper(root, name)) return (*findHelper(root, name)).getAverage();
+	if (findH(root, name)) return (findH(root, name)->data).getAverage();
 	else errorMessage();
 	return 0;
 }
@@ -113,7 +88,7 @@ double BinaryTree::findAverage(const char* name)
 unsigned long BinaryTree::findTelephoneNumber(const char* name)
 {
 	if (isEmpty()) return 0;
-	if (findHelper(root, name)) return (*findHelper(root, name)).getNumber();
+	if (findH(root, name)) return (findH(root, name)->data).getNumber();
 	else errorMessage();
 	return 0;
 }
@@ -125,17 +100,17 @@ bool BinaryTree::isEmpty() {
 void BinaryTree::changeAverage(const char* name)
 {
 	if (isEmpty()) errorMessage();
-	if (findHelper(root, name)) {
+	if (findH(root, name)) {
 
-		cout << "The old average - " << (*(findHelper(root, name))).getAverage() << '\n';
+		cout << "The old average - " << (findH(root, name)->data).getAverage() << '\n';
 		cout << "Enter new average for this student:" << '\n';
 		double newAverage;
 
 		cin >> newAverage;
 
-		(*(findHelper(root, name))).setAverage(newAverage);
+		(findH(root, name)->data).setAverage(newAverage);
 
-		cout << "The new average - " << (*(findHelper(root, name))).getAverage() << '\n';
+		cout << "The new average - " << (findH(root, name)->data).getAverage() << '\n';
 
 
 	}
@@ -148,17 +123,17 @@ void BinaryTree::changeTelephoneNumber(const char* name)
 {
 
 	if (isEmpty()) errorMessage();
-	if (findHelper(root, name)) {
+	if (findH(root, name)) {
 
-		cout << "The old telephone number - " << (*(findHelper(root, name))).getNumber() << '\n';
+		cout << "The old telephone number - " << (findH(root, name)->data).getNumber() << '\n';
 		cout << "Enter new telephone number for this student:" << '\n';
 		unsigned long newNumber;
 
 		cin >> newNumber;
 
-		(*(findHelper(root, name))).setNumber(newNumber);
+		(findH(root, name)->data).setNumber(newNumber);
 
-		cout << "The new telephone number - " << (*(findHelper(root, name))).getNumber() << '\n';
+		cout << "The new telephone number - " << (findH(root, name)->data).getNumber() << '\n';
 
 
 	}
@@ -241,9 +216,9 @@ void BinaryTree::writeStudentsInFile()
 bool BinaryTree::deleteStudent(const char* name)
 {
 	Student s;
-	if (findHelper(root, name))
+	if (findH(root, name))
 	{
-		s = *findHelper(root, name);
+		s = findH(root, name)->data;
 	}
 	else
 	{

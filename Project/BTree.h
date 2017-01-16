@@ -11,19 +11,25 @@ struct BTreeNode
 	vector<Student> allStudents;
 	int minimum;
 	vector<BTreeNode*> children;
-	//bool isLeaf;
-
 	BTreeNode(int);
-
+	
+	BTreeNode();
+	
 };
+
 class BTree
 {
 	BTreeNode *root;
 	int minimumDegree;
 	void splitHelper(BTreeNode*, int, BTreeNode*);
+	void insertHelper(BTreeNode*, Student&);
+	void printHelper(BTreeNode*, ostream&);
 public:
-	BTree(int);
-	bool isEmpty();
 	int capacity();
+	BTree(int);
+	void add(Student);
+	bool isEmpty();
+	void print();
+	vector<Student> getRoot();
 };
 #endif B_TREE

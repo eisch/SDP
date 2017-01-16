@@ -1,6 +1,7 @@
 #include <iostream>
 #include "student.h"
 #include "binaryTree.h"
+#include "BTree.h"
 
 using std::cout;
 using std::endl;
@@ -8,9 +9,9 @@ using std::boolalpha;
 
 Student::Student(char* _name, double _average, unsigned long _number) : average(_average), number(_number)
 {
-	
+
 	strcpy_s(name, _name);
-	
+
 }
 Student::Student()
 {
@@ -41,7 +42,7 @@ void Student::setName(const char* _name)
 {
 	strcpy_s(name, _name);
 }
-Student& Student::operator=(Student& other)
+Student& Student::operator=(const Student& other)
 {
 	if (this != &other)
 	{
@@ -54,11 +55,11 @@ Student& Student::operator=(Student& other)
 
 bool operator==(Student &s, Student& p)
 {
-	return (strcmp(p.getName(), s.getName())==0) && (p.getAverage() == s.getAverage()) 
+	return (strcmp(p.getName(), s.getName()) == 0) && (p.getAverage() == s.getAverage())
 		&& (p.getNumber() == s.getNumber());
 }
 
-istream& operator >>(istream &i, Student &s)
+istream& operator >> (istream &i, Student &s)
 {
 	return (i >> s.number >> s.average).getline(s.name, MAX_NAME_SIZE);
 }
@@ -91,25 +92,60 @@ int main()
 	Student e("D", 5, 65444);
 	Student f("Zl", 5, 65444);
 	Student g("Zf", 5, 65444);
+	Student h("Bc", 3.5, 44444);
+	Student i("E", 5, 65444);
+	Student j("Kl", 5, 65444);
+	Student k("St", 5, 65444);
+	Student l("M", 3, 4454);
+	Student m("L", 4.5, 98494);
 	//Node c(a);
-BinaryTree first;
+	//BinaryTree first;*/
 
-	first.addS(a);
+	/*first.addS(a);
 	first.addS(b);
-	first.addS(d);
 	first.addS(c);
+	first.addS(d);
 	first.addS(e);
 	first.addS(f);
-	first.addS(g);
-	first.print(); 
-	//first.findAverage("J");
-	first.changeAverage("P");
-	cout << d.getAverage();
-	//first.deleteStudent(b);
-	cout << endl;
+	first.addS(g);*/
+	//cout << first.findAverage("J");
+	//cout << first.findTelephoneNumber("Z");
+	//cout << endl;
+	//first.changeTelephoneNumber("Z");
+	//first.changeTelephoneNumber("P");
+	/*cout << d.getAverage();*/
+	//first.writeStudenktsInFile();
+	/*	cout << first.deleteStudent("J");
 	first.print();
-	
-	system("Pause");
-	return 0; 
+	first.deleteStudent("D");
+	//cout << endl;
+	//first.print();
+	//	cout << endl;
+	first.deleteStudent("A");
+	//cout << endl;
+	//first.print();*/
 
+	BTree tree(3);
+	tree.add(a);
+	tree.add(b);
+	tree.add(c);
+	tree.add(d);
+	tree.add(e);
+
+	tree.add(f);
+
+	//tree.add(g);
+
+/*	tree.add(h);
+	tree.add(i);
+	tree.add(j);
+	tree.add(k);
+	tree.add(l);
+	tree.add(m);*/
+
+	tree.print();
+
+
+	system("Pause");
+	return 0;
 }

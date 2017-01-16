@@ -42,10 +42,10 @@ struct Node
 class BinaryTree {
 	Node* root;
 	void addHelper(Node* s, Student);
-	Student* findHelper(Node*, const char*);
+	//Student* findHelper(Node*, const char*);
 	Node* findH(Node*, const char*);
 	//Student find(Node*, const char*);
-	void avh(Node*, const char*, Student&);
+	//void avh(Node*, const char*, Student&);
 	Student minNameStudent(Node*);
 	//bool delSt(const char*, Node*);
 	void helperPrint(Node*, ostream&);
