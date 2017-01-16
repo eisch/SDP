@@ -3,17 +3,17 @@
 
 #include <vector>
 #include "student.h"
-
+#include <fstream>
 using std::vector;
-
+using std::ofstream;
 struct BTreeNode
 {
 	vector<Student> allStudents;
-	int minimum;
+	int minimumDegree;
 	vector<BTreeNode*> children;
 	BTreeNode(int);
 	
-	BTreeNode();
+	
 	
 };
 
@@ -24,6 +24,7 @@ class BTree
 	void splitHelper(BTreeNode*, int, BTreeNode*);
 	void insertHelper(BTreeNode*, Student&);
 	void printHelper(BTreeNode*, ostream&);
+	Student searchHelper(BTreeNode*, const char*);
 public:
 	int capacity();
 	BTree(int);
@@ -31,5 +32,8 @@ public:
 	bool isEmpty();
 	void print();
 	vector<Student> getRoot();
+	void printBTreeInFile();
+	void findNumber(const char* name);
+	void findAverage(const char* name);
 };
 #endif B_TREE
