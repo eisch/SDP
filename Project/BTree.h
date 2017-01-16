@@ -24,7 +24,7 @@ class BTree
 	void splitHelper(BTreeNode*, int, BTreeNode*);
 	void insertHelper(BTreeNode*, Student&);
 	void printHelper(BTreeNode*, ostream&);
-	Student searchHelper(BTreeNode*, const char*);
+	Student* searchHelper(BTreeNode*, const char*);
 public:
 	int capacity();
 	BTree(int);
@@ -35,5 +35,7 @@ public:
 	void printBTreeInFile();
 	void findNumber(const char* name);
 	void findAverage(const char* name);
+	void changeAverage(const char* name);
+	void changeTelephoneNumber(const char* name);
 };
 #endif B_TREE

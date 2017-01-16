@@ -2,6 +2,7 @@
 #include <iostream>
 
 using std::cout;
+using std::cin;
 
 BTreeNode::BTreeNode(int _minimum) : minimumDegree(_minimum)
 {
@@ -122,15 +123,15 @@ void BTree::printHelper(BTreeNode* root, ostream& o)
 		}*/
 }
 
-Student BTree::searchHelper(BTreeNode* node, const char* name)
+Student* BTree::searchHelper(BTreeNode* node, const char* name)
 {
 	int index = 0;
 	while (index < node->allStudents.size() && compareNames(name, node->allStudents[index].getName())>0)
 	{
 		index++;
 	}
-	if (compareNames(name, node->allStudents[index].getName()) == 0) return node->allStudents[index];
-	if (node->children.size() == 0) return Student();
+	if (compareNames(name, node->allStudents[index].getName()) == 0) return &node->allStudents[index];
+	if (node->children.size() == 0) return &Student();
 	return searchHelper(node->children[index], name);
 }
 
@@ -157,13 +158,13 @@ void BTree::printBTreeInFile()
 
 void BTree::findNumber(const char* name)
 {
-	if (searchHelper(root, name) == Student())
+	if (searchHelper(root, name) == &Student())
 	{
 		errorMessage();
 	}
-	if (root != nullptr && !(searchHelper(root, name) == Student()))
+	if (root != nullptr && !(searchHelper(root, name) == &Student()))
 	{
-		cout << "The student " << name << " has number " << searchHelper(root, name).getNumber() << "." << '\n';;
+		cout << "The student " << name << " has number " << (*searchHelper(root, name)).getNumber() << "." << '\n';;
 	}
 	if (root == nullptr)
 	{
@@ -173,19 +174,53 @@ void BTree::findNumber(const char* name)
 
 void BTree::findAverage(const char * name)
 {
-	if (searchHelper(root, name) == Student())
+	if (searchHelper(root, name) == &Student())
 	{
 		errorMessage();
 	}
 
-	if (root != nullptr && !(searchHelper(root, name) == Student()))
+	if (root != nullptr && !(searchHelper(root, name) == &Student()))
 	{
-		cout << "The student " << name << " has average " << searchHelper(root, name).getAverage() << "." << '\n';
+		cout << "The student " << name << " has average " << (*searchHelper(root, name)).getAverage() << "." << '\n';
 	}
 	if (root == nullptr)
 	{
 		cout << "Empty database" << '\n';
 	}
+}
+void BTree::changeAverage(const char* name)
+{
+	if (isEmpty()) errorMessage();
+	if (!(searchHelper(root, name)==&Student())) {
+
+		cout << name << " 'old average  " << (*searchHelper(root, name)).getAverage() << '\n';
+		cout << "Enter new average for this student:" << '\n';
+		double newAverage;
+
+		cin >> newAverage;
+
+		(*searchHelper(root, name)).setAverage(newAverage);
+		cout << "The new average - " << (*searchHelper(root, name)).getAverage() << '\n';
+
+
+	}
+	else errorMessage();
+}
+void BTree::changeTelephoneNumber(const char * name)
+{
+	if (isEmpty()) errorMessage();
+	if (!(searchHelper(root, name) == &Student())) {
+
+		cout << name << " 'old telephone number  " << (*searchHelper(root, name)).getNumber() << '\n';
+		cout << "Enter new average for this student:" << '\n';
+		double newNumber;
+
+		cin >>newNumber;
+
+		(*searchHelper(root, name)).setNumber(newNumber);
+		cout << "The new average - " << (*searchHelper(root, name)).getNumber() << '\n';
+	}
+	else errorMessage();
 }
 
 bool BTree::isEmpty()

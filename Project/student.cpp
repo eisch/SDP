@@ -1,6 +1,5 @@
 #include <iostream>
 #include "student.h"
-#include "binaryTree.h"
 #include "BTree.h"
 
 using std::cout;
@@ -98,6 +97,10 @@ int main()
 	Student k("St", 5, 65444);
 	Student l("M", 3, 4454);
 	Student m("L", 4.5, 98494);
+	Student n("Jk", 5, 65444);
+	Student o("Np", 3, 4454);
+	Student p("Fk", 4.5, 98494);
+
 	//Node c(a);
 	//BinaryTree first;*/
 
@@ -134,17 +137,21 @@ int main()
 
 	tree.add(f);
 
-	//tree.add(g);
+	tree.add(g);
 
-/*	tree.add(h);
+	tree.add(h);
 	tree.add(i);
 	tree.add(j);
 	tree.add(k);
 	tree.add(l);
-	tree.add(m);*/
-
+	tree.add(m);
+	
+	tree.add(n);
+	tree.add(o);
+	tree.add(p);
+	//tree.printBTreeInFile();
+	tree.changeTelephoneNumber("Kl");
 	tree.print();
-
 
 	system("Pause");
 	return 0;
